@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BreakPoint</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#1a1a2e">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>BreakPoint</h1>
+        <p>Calisthenics Progress Tracker</p>
+    </header>
+
+    <main>
+        <!-- DASHBOARD PAGE -->
+        <div id="dashboard-page" class="page active">
+            <div class="card">
+                <h3>🔥 Current Streak: <span id="streak">0 Days</span></h3>
+                <p>Total Workouts: <span id="total-workouts">0</span></p>
+            </div>
+            <div class="card">
+                <h4>Latest Workout</h4>
+                <div id="latest-workout">None</div>
+            </div>
+            <div id="prs" class="card"><h4>Personal Records</h4></div>
+            <div id="achievements" class="card"><h4>Achievements</h4></div>
+            
+            <!-- Data Backup -->
+            <div class="card" style="border: 1px dashed #666; margin-top: 20px;">
+                <h4>Data Backup</h4>
+                <button onclick="exportData()" class="save-btn">📥 Export</button>
+                <label for="import-file" class="save-btn" style="display:inline-block; cursor:pointer;">📤 Import</label>
+                <input type="file" id="import-file" style="display:none" onchange="importData(event)">
+            </div>
+        </div>
+
+        <!-- WORKOUT PAGE -->
+        <div id="workout-page" class="page">
+            <!-- Manage Warm-ups -->
+            <div class="card">
+                <h4>Manage Warm-Up List</h4>
+                <input type="text" id="new-warmup-name" placeholder="New Warm-up Name">
+                <button onclick="addNewWarmupToList()" class="save-btn">Add</button>
+                <button onclick="deleteWarmupFromList()" class="delete-btn">Delete Selected</button>
+            </div>
+
+            <!-- Warm-up Builder -->
+            <div class="card" style="border-left: 5px solid #ff9800;">
+                <h3>🔥 Pre-Warm Up</h3>
+                <select id="warmup-builder"></select>
+                <input type="number" id="warmup-reps" placeholder="Reps (3 sets auto)">
+                <button onclick="addWarmupToWorkout()" class="save-btn" style="background:#ff9800">Add to Session</button>
+            </div>
+
+            <!-- Manage Exercises -->
+            <div class="card">
+                <h4>Manage Exercise List</h4>
+                <input type="text" id="new-exercise-name" placeholder="New Exercise Name">
+                <button onclick="addNewExerciseToList()" class="save-btn">Add</button>
+                <button onclick="deleteExerciseFromList()" class="delete-btn">Delete Selected</button>
+            </div>
+
+            <!-- Main Workout Builder -->
+            <div class="card" style="border-left: 5px solid #2196F3;">
+                <h3>💪 Workout Builder</h3>
+                <select id="exercise-builder"></select>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 10px 0;">
+                    <input type="number" id="set1" placeholder="Set 1">
+                    <input type="number" id="set2" placeholder="Set 2">
+                    <input type="number" id="set3" placeholder="Set 3">
+                    <input type="number" id="set4" placeholder="Set 4">
+                </div>
+                <textarea id="workout-notes" placeholder="Notes..."></textarea>
+                <button onclick="addExercise()" class="save-btn">Add Exercise</button>
+            </div>
+
+            <!-- Current Session Preview -->
+            <div id="current-workout"></div>
+            <button onclick="saveFullWorkout()" class="save-btn" style="width:100%; background:#4CAF50; padding:15px; margin-top:20px;">✅ Finish & Save Workout</button>
+        </div>
+
+     <!-- SKILLS PAGE -->
+<div id="skills-page" class="page">
+    <h2>Skill Trees</h2>
+
+    <!-- Planche Section -->
+    <div class="card">
+        <h4>Planche Progress <span id="planche-progress-text">0%</span></h4>
+        <div class="progress-container"><div id="planche-progress-bar" class="progress-bar"></div></div>
+        <div id="planche-skills">
+            <button class="skill-btn" data-index="0" onclick="toggleSkill(this)">Frog Stand</button>
+            <button class="skill-btn" data-index="1" onclick="toggleSkill(this)">Tuck Planche</button>
+            <button class="skill-btn" data-index="2" onclick="toggleSkill(this)">Advanced Tuck</button>
+            <button class="skill-btn" data-index="3" onclick="toggleSkill(this)">Straddle Planche</button>
+            <button class="skill-btn" data-index="4" onclick="toggleSkill(this)">Full Planche</button>
+        </div>
+    </div>
+
+    <!-- Handstand Section -->
+    <div class="card">
+        <h4>Handstand Progress <span id="handstand-progress-text">0%</span></h4>
+        <div class="progress-container"><div id="handstand-progress-bar" class="progress-bar"></div></div>
+        <div id="handstand-skills">
+            <button class="handstand-btn" data-index="0" onclick="toggleHandstand(this)">Wall Handstand</button>
+            <button class="handstand-btn" data-index="1" onclick="toggleHandstand(this)">Kick-up Practice</button>
+            <button class="handstand-btn" data-index="2" onclick="toggleHandstand(this)">Freestanding Handstand</button>
+            <button class="handstand-btn" data-index="3" onclick="toggleHandstand(this)">Handstand Push-up</button>
+        </div>
+    </div>
+
+    <!-- Front Lever Section -->
+    <div class="card">
+        <h4>Front Lever Progress <span id="frontlever-progress-text">0%</span></h4>
+        <div class="progress-container"><div id="frontlever-progress-bar" class="progress-bar"></div></div>
+        <div id="frontlever-skills">
+            <button class="frontlever-btn" data-index="0" onclick="toggleFrontLever(this)">Tuck</button>
+            <button class="frontlever-btn" data-index="1" onclick="toggleFrontLever(this)">Advanced Tuck</button>
+            <button class="frontlever-btn" data-index="2" onclick="toggleFrontLever(this)">One Leg</button>
+            <button class="frontlever-btn" data-index="3" onclick="toggleFrontLever(this)">Straddle</button>
+            <button class="frontlever-btn" data-index="4" onclick="toggleFrontLever(this)">Full Lever</button>
+        </div>
+    </div>
+</div>
+
+        <!-- HISTORY PAGE -->
+        <div id="history-page" class="page">
+            <h2>History</h2>
+            <div id="workout-history-list"></div>
+        </div>
+    </main>
+
+    <nav>
+        <button onclick="showPage('dashboard-page')"><span>🏠</span>Home</button>
+        <button onclick="showPage('workout-page')"><span>💪</span>Workout</button>
+        <button onclick="showPage('skills-page')"><span>🎯</span>Skills</button>
+        <button onclick="showPage('history-page')"><span>📜</span>History</button>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>

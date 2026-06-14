@@ -1,0 +1,231 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Arial,sans-serif;
+    padding:20px;
+    padding-bottom:90px;
+}
+
+header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.card{
+    background:#1e293b;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+h2{
+    margin-bottom:15px;
+}
+
+select,
+input{
+    width:100%;
+    padding:12px;
+    margin-bottom:10px;
+    border:none;
+    border-radius:10px;
+}
+
+button{
+    cursor:pointer;
+}
+
+.card button{
+    width:100%;
+    padding: 15px;
+    border:none;
+    border-radius:10px;
+    background:#38bdf8;
+    color:white;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.skill-tree{
+    list-style:none;
+    line-height:2;
+}
+
+.workout-entry{
+    background:#334155;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:10px;
+}
+
+.pr{
+    background:#334155;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:10px;
+}
+
+.achievement{
+    background:#14532d;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:10px;
+}
+
+/* Navigation Bar Styling */
+nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1a1a2e;
+    display: flex;
+    justify-content: space-around; /* Distributes buttons evenly */
+    padding: 10px 0;
+    border-top: 2px solid #16213e;
+    z-index: 1000;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 10px; /* Smaller text for mobile */
+    display: flex;
+    flex-direction: column; /* Icon on top, Text on bottom */
+    align-items: center;
+    cursor: pointer;
+    flex: 1; /* Each button takes equal space */
+}
+
+nav button span {
+    font-size: 20px; /* Make the emojis bigger */
+    margin-bottom: 2px;
+}
+
+/* Add padding to the bottom of pages so the nav doesn't cover content */
+.page {
+    padding-bottom: 80px; 
+}
+
+.skill-btn.skill-complete{
+    background:#16a34a !important;
+}
+
+.bottom-nav button{
+    background:none;
+    border:none;
+    color:white;
+    font-size:14px;
+    text-align:center;
+    font-size:24px;
+}
+.skill-locked{
+    background:#475569 !important;
+    opacity:0.5;
+    cursor:not-allowed;
+}
+.progress-container{
+    width:100%;
+    height:20px;
+    background:#334155;
+    border-radius:10px;
+    overflow:hidden;
+    margin-bottom:10px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#16a34a;
+    transition:0.3s;
+}
+
+.skill-btn {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+
+    background: #3fb0e5;
+    color: white;
+    font-weight: bold;
+}
+
+.skill-locked {
+    background: #37455f;
+    color: #9aa7bd;
+    cursor: not-allowed;
+}
+
+.skill-complete {
+    background: #1fa848;
+}
+
+
+
+.delete-btn{
+    margin-top:10px;
+    background:#ef4444 !important;
+    width:auto !important;
+    padding:8px 12px !important;
+}
+
+textarea{
+    width:100%;
+    min-height:80px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:10px;
+    resize:vertical;
+}
+
+button:focus{
+    outline:none;
+}
+
+#current-workout{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
+.delete-btn{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#dc2626;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.delete-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    background-color: #cc0000;
+}
